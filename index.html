@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Form Access</title>
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(checkLocation, showError);
+            } else {
+                document.getElementById("message").innerHTML = "Geolocation is not supported by your browser.";
+            }
+        }
+
+        function checkLocation(position) {
+            var userLat = position.coords.latitude;
+            var userLng = position.coords.longitude;
+
+            // Your specified allowed location
+            var allowedLat = 19.97294317791079;
+            var allowedLng = 73.78283769924307;
+            var radius = 0.05; // Allowed range (~5 km)
+
+            if (Math.abs(userLat - allowedLat) <= radius && Math.abs(userLng - allowedLng) <= radius) {
+                window.location.href = "https://forms.gle/8Pg83SVyonrz4mXF8"; // Your Google Form link
+            } else {
+                document.getElementById("message").innerHTML = "❌ Access Denied: You are not in the allowed location.";
+            }
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    document.getElementById("message").innerHTML = "You denied location access. Enable it to proceed.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    document.getElementById("message").innerHTML = "Location information is unavailable.";
+                    break;
+                case error.TIMEOUT:
+                    document.getElementById("message").innerHTML = "Location request timed out.";
+                    break;
+                default:
+                    document.getElementById("message").innerHTML = "An unknown error occurred.";
+            }
+        }
+    </script>
+</head>
+<body onload="getLocation()">
+    <h2>Checking Location...</h2>
+    <p id="message"></p>
+</body>
+</html>
