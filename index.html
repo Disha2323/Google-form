@@ -17,10 +17,10 @@
             var userLat = position.coords.latitude;
             var userLng = position.coords.longitude;
 
-            // Your specified allowed location
-            var allowedLat = 19.97294317791079;
-            var allowedLng = 73.78283769924307;
-            var radius = 0.05; // Allowed range (~5 km)
+            // Your specified allowed location, 
+            var allowedLat = 19.926914688751182;
+            var allowedLng = 73.64701795447074;
+            var radius = 0.005; // Allowed range (~500 m)
 
             if (Math.abs(userLat - allowedLat) <= radius && Math.abs(userLng - allowedLng) <= radius) {
                 window.location.href = "https://forms.gle/8Pg83SVyonrz4mXF8"; // Your Google Form link
